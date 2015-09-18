@@ -13,7 +13,6 @@ public class MainWindow extends JFrame{
 
     // constructor and methods
     public MainWindow(){
-        System.out.printf("Max : %d, Min : %d\n", Byte.MAX_VALUE, Byte.MIN_VALUE);
         setMainWindow();
         setMainContainer();
         setMainMenuBar();
@@ -111,24 +110,6 @@ public class MainWindow extends JFrame{
             }
         }
     }
-
-//    private void drawImageFromBytes(byte[] bytes, int width){
-//        int height = bytes.length / width;
-//        int value;
-//        Color c;
-//        Graphics g = imagePanel.getGraphics();
-//        g.clearRect(0, 0, imagePanel.getWidth(), imagePanel.getHeight());
-//
-//        for(int i = 0; i < height; i++){
-//            for(int j = 0; j < width; j++){
-//                value = bytes[i * width + j] & 0xFF;
-//                c = new Color(value, value, value);
-//                g.setColor(c);
-//                g.drawRect(j, i, 1, 1);
-//            }
-//        }
-//        g.dispose();
-//    }
 
     // main method
     public static void main(String[] args){

@@ -14,8 +14,10 @@ public class RawImagePanel extends JPanel{
     }
 
     public void setRawImageWidth(int width){
+				int oldImageWidth = rawImage.getImageWidth();
+				int oldImageHeight = rawImage.getImageHeight();
         rawImage.setImageWidth(width);
-        updateImage(getGraphics());
+        updateImage(getGraphics(), oldImageWidth, oldImageHeight);
     }
 
     @Override
@@ -31,11 +33,15 @@ public class RawImagePanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        repaint();
-        updateImage(g);
+        drawImage(g);
     }
 
-    private void updateImage(Graphics g){
-        g.drawImage(rawImage.getBufferImage(), 0, 0, null);
+    private void updateImage(Graphics g, int width, int height){
+				g.clearRect(0, 0, width, height);
+				drawImage(g);
     }
+
+		private void drawImage(Graphics g){
+        g.drawImage(rawImage.getBufferImage(), 0, 0, null);
+		}
 }
