@@ -43,7 +43,10 @@ public class RawImage {
     public void setImage(byte[] imageBytes, int width){
         if(imageBytes == null)
             return;
-        this.imageBytes = imageBytes;
+				if(this.imageBytes != imageBytes)
+    	    this.imageBytes = imageBytes;
+				if(width < 1)
+						width = (int)Math.sqrt(imageBytes.length);
         imageWidth = width;
         imageHeight = imageBytes.length / width;
 
