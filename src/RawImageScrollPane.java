@@ -3,8 +3,8 @@ import javax.swing.*;
 
 public class RawImageScrollPane extends JScrollPane {
     private RawImagePanel rawImagePanel;
-		private JScrollBar horizontalBar;
-		private JScrollBar verticalBar;
+    private JScrollBar horizontalBar;
+    private JScrollBar verticalBar;
 
     public RawImageScrollPane(){
         super();
@@ -12,8 +12,8 @@ public class RawImageScrollPane extends JScrollPane {
         setBackground(Color.blue);
         setViewportView(rawImagePanel);
 
-				horizontalBar = getHorizontalScrollBar();
-				verticalBar = getVerticalScrollBar();
+        horizontalBar = getHorizontalScrollBar();
+        verticalBar = getVerticalScrollBar();
     }
 
     public void setNewImage(byte[] bytes){
@@ -27,20 +27,20 @@ public class RawImageScrollPane extends JScrollPane {
     }
 
     public void setRawImageWidth(int width){
-				Dimension oldSize = rawImagePanel.getSize();
+        Dimension oldSize = rawImagePanel.getSize();
         rawImagePanel.setRawImageWidth(width);
-				Dimension newSize = rawImagePanel.getSize();
-				if(oldSize.getWidth() > newSize.getWidth()){
-					horizontalBar.setVisible(false);
-				} else {
-					horizontalBar.setVisible(true);
-				}
+        Dimension newSize = rawImagePanel.getSize();
+        if(oldSize.getWidth() > newSize.getWidth()){
+            horizontalBar.setVisible(false);
+        } else {
+            horizontalBar.setVisible(true);
+        }
 
-				if(oldSize.getHeight() > newSize.getHeight()){
-					verticalBar.setVisible(false);
-				} else {
-					verticalBar.setVisible(true);
-				}
+        if(oldSize.getHeight() > newSize.getHeight()){
+            verticalBar.setVisible(false);
+        } else {
+            verticalBar.setVisible(true);
+        }
     }
 
     @Override

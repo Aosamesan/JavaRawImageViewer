@@ -9,7 +9,7 @@ public class MainWindow extends JFrame{
     private JMenuBar mainMenuBar;
     private JFileChooser mainFileChooser;
     private JTabbedPane mainTabPane;
-		private RawFileFilter rawFileFilter;
+    private RawFileFilter rawFileFilter;
 
 
     // constructor and methods
@@ -24,10 +24,10 @@ public class MainWindow extends JFrame{
         setSize(500, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFileChooser = new JFileChooser();
-				rawFileFilter = new RawFileFilter();
-				mainFileChooser.addChoosableFileFilter(rawFileFilter);
-				mainFileChooser.setAcceptAllFileFilterUsed(false);
-				mainFileChooser.setFileFilter(rawFileFilter);
+        rawFileFilter = new RawFileFilter();
+        mainFileChooser.addChoosableFileFilter(rawFileFilter);
+        mainFileChooser.setAcceptAllFileFilterUsed(false);
+        mainFileChooser.setFileFilter(rawFileFilter);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class MainWindow extends JFrame{
         setWidthMenuItem.addActionListener((e) -> {
             try {
                 JPanel selectedPanel = (JPanel) mainTabPane.getSelectedComponent();
-								if(selectedPanel == null)
-										return;
+                if(selectedPanel == null)
+                    return;
                 for (Component c : selectedPanel.getComponents()) {
                     if (c instanceof RawImageScrollPane) {
                         String s = JOptionPane.showInputDialog(this, "Input width");
