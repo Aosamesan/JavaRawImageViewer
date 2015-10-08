@@ -16,6 +16,18 @@ public class RawImageScrollPane extends JScrollPane {
         verticalBar = getVerticalScrollBar();
     }
 
+    public final byte[] getImageBytes(){
+        return rawImagePanel.getImageBytes();
+    }
+
+    public final int getImageWidth(){
+        return (int)rawImagePanel.getSize().getWidth();
+    }
+
+    public final int getImageHeight(){
+        return (int)rawImagePanel.getSize().getHeight();
+    }
+
     public void setNewImage(byte[] bytes){
         try{
             String s = JOptionPane.showInputDialog(this, "Input width");

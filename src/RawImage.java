@@ -16,6 +16,8 @@ public class RawImage {
         imageSize = new Dimension(imageWidth, imageHeight);
     }
 
+    public final byte[] getImageBytes() {return imageBytes;}
+
     public int getImageHeight(){
         return imageHeight;
     }

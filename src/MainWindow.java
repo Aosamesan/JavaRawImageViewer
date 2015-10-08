@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.*;
 
 public class MainWindow extends JFrame{
@@ -45,6 +43,8 @@ public class MainWindow extends JFrame{
         mainMenuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         mainMenuBar.add(menu);
+        JMenu blurMenu = new JMenu("Blur");
+        mainMenuBar.add(blurMenu);
 
         ////// File Menu
         JMenuItem openMenuItem = new JMenuItem("Open...");
@@ -116,6 +116,17 @@ public class MainWindow extends JFrame{
                 }
             }
         }
+    }
+
+    private void addRawImage(byte[] imageBytes, int width, String imageName){
+        RawImageScrollPane newPane = new RawImageScrollPane();
+        newPane.setNewImage(imageBytes);
+        newPane.setRawImageWidth(width);
+        newPane.setName(imageName);
+        JPanel shell = new JPanel(new BorderLayout());
+        shell.add(newPane, BorderLayout.CENTER);
+        mainTabPane.addTab(imageName, shell);
+        mainTabPane.setSelectedComponent(shell);
     }
 
     // main method
