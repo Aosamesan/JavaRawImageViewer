@@ -91,38 +91,6 @@ public class MainWindow extends JFrame{
         quitMenuItem.addActionListener((e) -> System.exit(0));
         menu.add(quitMenuItem);
 
-
-        // Blur Menu
-        JMenuItem basicBlurMenuItem = new JMenuItem("Basic Blur");
-        basicBlurMenuItem.addActionListener((e) -> {
-            try{
-                Component selectedComponent = mainTabPane.getSelectedComponent();
-                if(selectedComponent == null)
-                    return;
-                RawImageScrollPane selectedPane = null;
-                for(Component c : ((JPanel)selectedComponent).getComponents()){
-                    if(c instanceof  RawImageScrollPane)
-                        selectedPane = (RawImageScrollPane)c;
-                }
-                if(selectedPane == null)
-                    return;
-
-                int width = selectedPane.getImageWidth();
-                int height = selectedPane.getImageHeight();
-                int radius = Integer.parseInt(
-                        JOptionPane.showInputDialog(basicBlurMenuItem, "Input radius(integer)"));
-                BasicBlur blur = new BasicBlur();
-                blur.setRadius(radius);
-
-                byte[] blurredBytes = blur.operation(selectedPane.getImageBytes(), width);
-                addRawImage(blurredBytes, width, "blurred_" + selectedPane.getName());
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
-
-        });
-        blurMenu.add(basicBlurMenuItem);
-
         setJMenuBar(mainMenuBar);
     }
 
