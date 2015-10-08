@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.*;
 
 public class MainWindow extends JFrame{
@@ -45,6 +43,8 @@ public class MainWindow extends JFrame{
         mainMenuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         mainMenuBar.add(menu);
+        JMenu blurMenu = new JMenu("Blur");
+        mainMenuBar.add(blurMenu);
 
         ////// File Menu
         JMenuItem openMenuItem = new JMenuItem("Open...");
@@ -91,6 +91,38 @@ public class MainWindow extends JFrame{
         quitMenuItem.addActionListener((e) -> System.exit(0));
         menu.add(quitMenuItem);
 
+
+        // Blur Menu
+        JMenuItem basicBlurMenuItem = new JMenuItem("Basic Blur");
+        basicBlurMenuItem.addActionListener((e) -> {
+            try{
+                Component selectedComponent = mainTabPane.getSelectedComponent();
+                if(selectedComponent == null)
+                    return;
+                RawImageScrollPane selectedPane = null;
+                for(Component c : ((JPanel)selectedComponent).getComponents()){
+                    if(c instanceof  RawImageScrollPane)
+                        selectedPane = (RawImageScrollPane)c;
+                }
+                if(selectedPane == null)
+                    return;
+
+                int width = selectedPane.getImageWidth();
+                int height = selectedPane.getImageHeight();
+                int radius = Integer.parseInt(
+                        JOptionPane.showInputDialog(basicBlurMenuItem, "Input radius(integer)"));
+                BasicBlur blur = new BasicBlur();
+                blur.setRadius(radius);
+
+                byte[] blurredBytes = blur.operation(selectedPane.getImageBytes(), width);
+                addRawImage(blurredBytes, width, "blurred_" + selectedPane.getName());
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+
+        });
+        blurMenu.add(basicBlurMenuItem);
+
         setJMenuBar(mainMenuBar);
     }
 
@@ -116,6 +148,17 @@ public class MainWindow extends JFrame{
                 }
             }
         }
+    }
+
+    private void addRawImage(byte[] imageBytes, int width, String imageName){
+        RawImageScrollPane newPane = new RawImageScrollPane();
+        newPane.setNewImage(imageBytes);
+        newPane.setRawImageWidth(width);
+        newPane.setName(imageName);
+        JPanel shell = new JPanel(new BorderLayout());
+        shell.add(newPane, BorderLayout.CENTER);
+        mainTabPane.addTab(imageName, shell);
+        mainTabPane.setSelectedComponent(shell);
     }
 
     // main method

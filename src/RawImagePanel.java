@@ -20,6 +20,10 @@ public class RawImagePanel extends JPanel{
         updateImage(getGraphics(), oldImageWidth, oldImageHeight);
     }
 
+    public final byte[] getImageBytes(){
+        return rawImage.getImageBytes();
+    }
+
     @Override
     public Dimension getSize(){
         return rawImage.getSize();
@@ -37,6 +41,8 @@ public class RawImagePanel extends JPanel{
     }
 
     private void updateImage(Graphics g, int width, int height){
+        if(g == null)
+            return;
         g.clearRect(0, 0, width, height);
         drawImage(g);
     }
