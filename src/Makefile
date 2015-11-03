@@ -1,5 +1,5 @@
 all:
 	javac *.java
-	jar -cvmf manifest.txt RawimageViewer.jar *.class
+	jar -cvmf Manifest.txt RawImageViewer.jar ./*.class
 clean:
 	rm *.class
